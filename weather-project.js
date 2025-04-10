@@ -19,17 +19,17 @@ function time() {
 }
 time(); //displays time once uploading the page
 
+
 //function to display the temperature of searched city
 function DisplayTemperature() {
   event.preventDefault();
   //select the input of user
-  let city = document.querySelector(".search-inpt").value.trim();
-  let apiKey = "4fo06t62bf3380c33aa375d8a094089a";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+    let city = document.querySelector(".search-inpt").value.trim();
+    let apiKey = "4fo06t62bf3380c33aa375d8a094089a";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
 
-  axios.get(apiUrl).then(function (response) {
+    axios.get(apiUrl).then(function (response) {
     let temperature = Math.round(response.data.temperature.current);
-
     //repace the elements by real time data
     let h1 = document.querySelector("h1");
     let temp = document.querySelector(".degree");
@@ -37,5 +37,22 @@ function DisplayTemperature() {
     temp.innerHTML = temperature;
   });
 }
+
+// function to Display description of the weather
+function DisplayDescription(){
+    event.preventDefault();
+    let city = document.querySelector(".search-inpt").value.trim();
+    let apiKey = "4fo06t62bf3380c33aa375d8a094089a";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+
+    axios.get(apiUrl).then(function (response){
+    let status = response.data.condition.description;
+    let span= document.querySelector(".condition");
+    span.innerHTML = status;
+
+});
+}
+
 let submitButton = document.querySelector(".submit-inpt");
 submitButton, addEventListener("submit", DisplayTemperature);
+submitButton, addEventListener("submit", DisplayDescription);
